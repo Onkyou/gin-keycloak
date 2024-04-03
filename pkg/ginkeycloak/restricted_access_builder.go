@@ -1,8 +1,9 @@
 package ginkeycloak
 
 import (
+	"log/slog"
+
 	"github.com/gin-gonic/gin"
-	"github.com/golang/glog"
 )
 
 type BuilderConfig struct {
@@ -49,7 +50,7 @@ func (builder restrictedAccessBuilderImpl) RestrictButForRealm(realmName string)
 
 func (builder restrictedAccessBuilderImpl) Build() gin.HandlerFunc {
 	if builder.config.DisableSecurityCheck {
-		glog.Warningf("[ginkeycloak] access check is disabled")
+		slog.Warn("[ginkeycloak] access check is disabled")
 		return func(ctx *gin.Context) {}
 	}
 	return Auth(builder.checkIfOneConditionMatches(), builder.keycloakConfig())
