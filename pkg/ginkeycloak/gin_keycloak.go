@@ -272,16 +272,16 @@ func authChain(config KeycloakConfig, accessCheckFunctions ...AccessCheckFunctio
 		select {
 		case ok := <-varianceControl:
 			if !ok {
-				slog.Info("[Gin-OAuth] access not allowed", "time", time.Since(t), "uri", ctx.Request.URL.Path)
+				slog.Info("[Gin-OAuth] access not allowed", "duration", time.Since(t), "path", ctx.Request.URL.Path)
 				return
 			}
 		case <-time.After(VarianceTimer):
 			_ = ctx.AbortWithError(http.StatusGatewayTimeout, errors.New("authorization check overtime"))
-			slog.Info("[Gin-OAuth]overtime", "time", time.Since(t), "uri", ctx.Request.URL.Path)
+			slog.Info("[Gin-OAuth]overtime", "duration", time.Since(t), "path", ctx.Request.URL.Path)
 			return
 		}
 
-		slog.Info("[Gin-OAuth] access allowed", "time", time.Since(t), "uri", ctx.Request.URL.Path)
+		slog.Info("[Gin-OAuth] access allowed", "duration", time.Since(t), "path", ctx.Request.URL.Path)
 	}
 }
 
