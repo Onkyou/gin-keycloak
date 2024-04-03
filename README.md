@@ -1,5 +1,7 @@
-# Gin-Keycloak
+#   Additional notes
+This project is forked from github.com/tbaehler/gin-keycloak to avoid using glog.
 
+# Gin-Keycloak
 
 Gin-Keycloak is specially made for [Gin Framework](https://github.com/gin-gonic/gin)
 users who also want to use Keycoak.
